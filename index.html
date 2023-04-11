@@ -8,6 +8,14 @@
 </head>
 <body>
     <canvas id="gridCanvas"></canvas>
+    <div class="slider-container">
+        <label for="gridForceSlider">Grid disturbance force: <span id="gridForceValue">1</span> magic</label>
+        <input type="range" id="gridForceSlider" min="0" max="10" value="1" step="1">
+    </div>
+    <div class="slider-container">
+        <label for="gridForceReachSlider">Force reach: <span id="gridForceReachValue">1</span> space</label>
+        <input type="range" id="gridForceReachSlider" min="0" max="10" value="1" step="1">
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

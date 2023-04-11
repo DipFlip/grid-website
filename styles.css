@@ -1,11 +1,32 @@
 body, html {
+    /* display: flex;
+    flex-direction: column; */
     margin: 0;
     padding: 0;
     height: 100%;
     overflow: hidden;
-}
-
-canvas {
+  }
+  
+  canvas {
     display: block;
     background-color: #ffffff;
-}
+    z-index: -1;
+  }
+  
+  .slider-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .slider-container:nth-of-type(2) {
+    top: 75px;
+  }
+  
+  .slider-container label {
+    display: block;
+    margin-bottom: 5px;
+  }

@@ -1,10 +1,16 @@
 const canvas = document.getElementById('gridCanvas');
 const ctx = canvas.getContext('2d');
+const gridForceSlider = document.getElementById('gridForceSlider');
+const gridForceValue = document.getElementById('gridForceValue');
+const gridForceReachSlider = document.getElementById('gridForceReachSlider');
+const gridForceReachValue = document.getElementById('gridForceReachValue');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const gridSpacing = 39; // Approximately 1 cm in pixels
+let forceAmount = 1;
+let forceReach = 1;
 
 function drawGrid(mouseX, mouseY) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -36,19 +42,25 @@ function calculateOffset(distance) {
     if (normalizedDistance >= 20 || normalizedDistance <= 0.0001) {
         return 0;
     } else {
-        console.log("distance: " + distance);
-        console.log("normalizedDistance: " + normalizedDistance);
-        let difference = -normalizedDistance + 1.3;
-        // let offsetX = (3.5 - ((4.0 - normalizedDistance) ** (-1) * (normalizedDistance ** (-1.5)))) * Math.exp(-normalizedDistance+3)/100;
-        let offsetX = 2.718**((-1*difference**2)) / 10;
-        // offsetX = offsetX < 0.0001 ? 0 : offsetX * gridSpacing;
-        console.log("offsetX: " + offsetX);
+        let difference = -normalizedDistance + forceReach;
+        console.log(forceAmount)
+        let offsetX = 2.718**((-1*difference**2)) / 10 * forceAmount;
         if (distance < 0) {
             offsetX = -offsetX;
         }
         return offsetX * gridSpacing;
     }
 }
+
+gridForceSlider.addEventListener('input', (event) => {
+    forceAmount = parseInt(event.target.value, 10);
+    gridForceValue.innerText = forceAmount;
+});
+
+gridForceReachSlider.addEventListener('input', (event) => {
+    forceReach = parseInt(event.target.value, 10);
+    gridForceReachValue.innerText = forceReach;
+});
 
 canvas.addEventListener('mousemove', (event) => {
     const rect = canvas.getBoundingClientRect();
