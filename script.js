@@ -70,5 +70,16 @@ canvas.addEventListener('mousemove', (event) => {
     drawGrid(mouseX, mouseY);
 });
 
+// Add touch event support
+canvas.addEventListener('touchmove', (event) => {
+    event.preventDefault(); // Prevent scrolling on touch devices
+    const rect = canvas.getBoundingClientRect();
+    const touch = event.touches[0];
+    const mouseX = touch.clientX - rect.left;
+    const mouseY = touch.clientY - rect.top;
+
+    drawGrid(mouseX, mouseY);
+}, { passive: false });
+
 // Initial draw
 drawGrid(-1, -1); // Pass -1, -1 to initialize grid without any mouse interaction
